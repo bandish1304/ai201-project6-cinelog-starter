@@ -16,8 +16,12 @@ After that, I ran the test suite and confirmed all tests passed.
 
 ## Comment 2 - Deduplication
 **What I did:**
+I added a duplicate check inside add_to_watchlist before creating a new row. The function now looks for an existing watchlist entry for the same user and film, and if it finds one, it raises AlreadyInWatchlistError instead of creating a second record.
+
+I followed the same service-layer pattern already used in add_to_collection so behavior is consistent between collection and watchlist features.
 
 **How I verified:**
+I reviewed the query path and confirmed the duplicate check runs before insert/commit. I also ran the test suite to make sure the new guard did not break existing behavior.
 
 ## Comment 3 - Missing test
 **What I did:**
