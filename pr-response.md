@@ -5,10 +5,14 @@
 
 ## Comment 1 - Rename
 **What I did:**
-Renamed `save_to_watchlist()` to `add_to_watchlist()` in the watchlist service to match CineLog's established `verb_to_noun` naming convention. Updated all call sites in the watchlist route import and POST handler.
+I renamed save_to_watchlist to add_to_watchlist in the watchlist service, then updated the route import and the add endpoint call.
+
+I made this change to match the naming style already used in the project (add_to_collection, remove_from_collection, get_collection), so watchlist functions are consistent with the rest of the codebase.
 
 **How I verified:**
-Ran a project-wide search for both names to confirm there were no leftover `save_to_watchlist` references. Then ran the test suite (`pytest tests/`) and confirmed all existing tests passed.
+I ran a project-wide search to make sure there were no leftover uses of the old function name.
+
+After that, I ran the test suite and confirmed all tests passed.
 
 ## Comment 2 - Deduplication
 **What I did:**
