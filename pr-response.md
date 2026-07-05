@@ -25,8 +25,12 @@ I reviewed the query path and confirmed the duplicate check runs before insert/c
 
 ## Comment 3 - Missing test
 **What I did:**
+I created tests/test_watchlist.py and added a watchlist version of the nonexistent film test.
+
+It follows the same structure as the collection test: same in-memory app fixture style, same sample user setup, and the same expectation that a missing film id should raise FilmNotFoundError.
 
 **How I verified:**
+I ran pytest tests/test_watchlist.py -v and confirmed the new test passed.
 
 ## Comment 4 - Default visibility
 **My position:**
