@@ -70,10 +70,17 @@ The tradeoff is that date-added can make refinding an older specific title harde
 
 ## Comment 6 - Rebase
 **What conflicted:**
+After rebasing on origin/main, the watchlist feature had a UUID migration mismatch. Main had already moved film IDs to UUIDs, but my watchlist side still had pre-refactor assumptions in a few places. The biggest break was that WatchlistEntry was missing from models.py after replaying commits, which caused an import error in watchlist_service.
 
 **How I resolved it:**
+I rebased the branch onto origin/main, then resolved the watchlist/model mismatch by restoring WatchlistEntry in models.py with film_id as a String(36) foreign key to film.id.
+
+I also updated watchlist references that still described film_id as an integer so the service and route docs match the UUID schema.
 
 **How I verified no conflict remains:**
+I ran the full test suite (pytest tests/ -v) and confirmed all tests passed.
+
+I checked for merge commits with git log --merges --oneline and got no output, confirming the branch history is linear after rebase.
 
 ## PR Description
 <!-- Written at the end - feature overview, design decisions, manual testing steps -->
