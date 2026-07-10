@@ -121,4 +121,4 @@ Manual testing steps:
 ## Commit History Screenshot
 I ran git log --oneline and confirmed the branch has conventional commit messages, at least 4 separate commits, and no merge commits.
 
-![Git log oneline history](../project6.png)
+![Git log oneline history](project6.png)
