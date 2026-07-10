@@ -1,11 +1,22 @@
 # PR Response Doc - CineLog Watchlist Feature
 
 ## AI Usage
-I used AI as a devil's advocate after writing my draft responses for Comments 4 and 5.
+I used AI in three concrete ways during this project.
 
-What I asked: what counterargument would a careful reviewer raise, and what tradeoff might I be underweighting.
+1. Codebase orientation and pattern check:
+I used AI to map where service naming and deduplication patterns already existed before making changes. That helped me mirror the existing add_to_collection structure when implementing watchlist deduplication.
 
-What changed: I expanded both responses to acknowledge privacy and usability risks more directly, and I added a clearer mitigation/future option where appropriate.
+2. Verification workflow:
+I used AI to sanity-check call-site coverage after the rename work, and to verify commit-history formatting against conventional commit expectations before finalizing.
+
+3. Design argument stress test for Comments 4 and 5:
+After writing my own draft positions, I asked AI for reviewer-style counterarguments and missing tradeoffs.
+
+For Comment 4 (visibility default), AI pushed on privacy expectations. I kept my original position (public=True) but strengthened the tradeoff section and added a concrete mitigation: clearer visibility messaging and easy per-entry toggling.
+
+For Comment 5 (sort order), AI pushed on the discoverability vs refindability tension. I kept my original position (alphabetical default for now), but I added direct engagement with the maintainer's date-added reasoning and proposed a follow-up sort parameter so both use cases are supported.
+
+The final decisions and wording are my own, but AI helped me pressure-test weak spots before submission.
 
 ## Comment 1 - Rename
 **What I did:**
