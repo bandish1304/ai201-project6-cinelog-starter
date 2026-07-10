@@ -83,7 +83,29 @@ I ran the full test suite (pytest tests/ -v) and confirmed all tests passed.
 I checked for merge commits with git log --merges --oneline and got no output, confirming the branch history is linear after rebase.
 
 ## PR Description
-<!-- Written at the end - feature overview, design decisions, manual testing steps -->
+This PR adds a watchlist feature to CineLog so users can save films they want to watch later and retrieve that list through API endpoints.
+
+The implementation includes a watchlist model, watchlist routes, service-layer validation for missing films, deduplication to prevent duplicate watchlist entries, and a watchlist test for the nonexistent film case. It also includes the UUID compatibility updates needed after rebasing on main.
+
+Design decisions made in this PR:
+1. Visibility default decision: keep public=True as the default for watchlist entries, to optimize for low-friction sharing in a community app.
+2. Sort order decision: keep alphabetical ordering as the current default for watchlist retrieval, while acknowledging date-added ordering is a valid alternative and proposing configurable sort as a follow-up.
+
+Manual testing steps:
+1. Start the app:
+	python app.py
+2. In a separate terminal, verify there are films available:
+	curl http://127.0.0.1:5000/films/
+3. Copy one film id from the response and use a known user id from your local db seed/data.
+4. Add a film to watchlist:
+	curl -X POST http://127.0.0.1:5000/watchlist/<user_id>/add -H "Content-Type: application/json" -d "{\"film_id\":\"<film_id>\"}"
+5. Add the same film again and verify duplicate handling (should not create a second entry and should return an error response).
+6. Try adding a nonexistent film id and verify not found behavior.
+7. Fetch the watchlist:
+	curl http://127.0.0.1:5000/watchlist/<user_id>
+8. Confirm returned entries include watchlist metadata (date_added, public) and use UUID-style film ids.
+9. Run automated tests:
+	pytest tests/ -v
 
 ## Commit History Screenshot
 I ran git log --oneline and confirmed the branch has conventional commit messages, at least 4 separate commits, and no merge commits.
