@@ -84,3 +84,8 @@ I checked for merge commits with git log --merges --oneline and got no output, c
 
 ## PR Description
 <!-- Written at the end - feature overview, design decisions, manual testing steps -->
+
+## Commit History Screenshot
+I ran git log --oneline and confirmed the branch has conventional commit messages, at least 4 separate commits, and no merge commits.
+
+![Git log oneline history](../project6.png)
